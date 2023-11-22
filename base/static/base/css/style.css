@@ -1,0 +1,16 @@
+
+.navbar-brand
+{
+  font-family: 'Lato', sans-serif;
+  color:grey;
+  font-size: 30px;
+  margin: 0px;
+}
+
+.nav-link
+{
+  font-family: 'Lato', sans-serif;
+  color:grey;
+  font-size: 20px;
+  margin: 0px;
+}
