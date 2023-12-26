@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Select a new car from the list.</p>
+
+<select id="category">
+    <option value="" selected>Select Category</option>     
+</select>
+
+
+<select id="sub_category">
+    <option value="" selected>Select Sub Category</option>  
+</select>
+
+<p>When you select a new car, a function is triggered which outputs the value of the selected car.</p>
+
+<p id="demo"></p>
+
+<script>
+    var list_sub = {{list_sub|safe}}
+    var list_cate = {{list_cate|safe}}
+    var list_sub_parent = {{list_sub_parent|safe}}
+    for (const x of list_cate) {
+        category.options[category.options.length] = new Option(x, x);
+    }
+    category.onchange = function () {
+        sub_category.length = 1;
+        if(this.value != ""){
+          for (let i = 0; i < list_sub_parent.length; i++) {
+            if(list_sub_parent[i].localeCompare(this.value) == 0){
+                sub_category.options[sub_category.options.length] = new Option(list_sub[i], list_sub[i]);
+            }
+          }
+        }
+    };
+    
+</script>
+
+</body>
+</html>

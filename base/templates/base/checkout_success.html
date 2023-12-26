@@ -1,0 +1,68 @@
+{% extends 'base/base_page.html' %}
+{% load static %}
+
+{% block content %}
+
+    <!-- Contact Start -->
+    <div class="container-fluid pt-5">
+        <div class="text-center mb-4">
+            <h1><i class="fa fa-check-circle fa-3x" aria-hidden="true" style="color: #33d17a;"></i></h1>
+            <h2 style="margin:30px 0; " class="section-title px-5"><span class="px-2">Đặt hàng thành công</span></h2>
+            <p>Cảm ơn quý khách đã mua hàng tại MyShop</p>
+            <p>Chúng tôi sẽ sớm liên hệ đến quý khách</p>
+        </div>
+        
+        <div class="d-flex justify-content-center">
+            <div class="card border-secondary mb-5">
+                <div class="card-header bg-secondary border-0">
+                    <h4 class="font-weight-semi-bold m-0 text-center">Thông tin đơn hàng</h4>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <p>Mã đơn hàng:</p>
+                        <p style="margin-left:100px; font-weight: bold;">#{{order.id}}</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p>Hình thức thanh toán:</p>
+                        
+                        {% if order.payment == "Direct" %}
+                            <p style="margin-left:100px; font-weight: bold;">Thanh toán tiền mặt khi nhận hàng (COD)</p>
+                        {% else %}
+                            <p style="margin-left:100px; font-weight: bold;">Chuyển khoản</p>
+                        {% endif %}
+                            
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p>Tên người nhận hàng:</p>
+                        <p style="margin-left:100px; font-weight: bold;">{{order.name}}</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p>Số điện thoại:</p>
+                        <p style="margin-left:100px; font-weight: bold;">{{order.phone}}</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p>Địa chỉ nhận hàng:</p>
+                        <p style="margin-left:100px; font-weight: bold;">{{order.street}}, {{order.ward}}, {{order.district}}, {{order.city}}</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p>Ghi chú: </p>
+                        <p style="margin-left:100px; font-weight: bold;">{{order.note}}</p>
+                    </div>
+                </div>
+                <div class="card-footer border-secondary bg-transparent">
+                    <div class="d-flex justify-content-between mt-2">
+                        <h5 class="font-weight-bold">Tổng tiền:</h5>
+                        <h5 class="font-weight-bold">312</h5>
+                    </div>
+                </div>
+                <div class="card-footer border-secondary bg-transparent">
+                    <a href="{% url 'home' %}"><button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Xem thêm sản phẩm khác</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+
+
+{% endblock content %}

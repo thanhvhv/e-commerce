@@ -1,0 +1,183 @@
+{% extends 'base/base_page.html' %}
+{% load static %}
+
+{% block content %}
+
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Checkout</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Checkout</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Checkout Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <div class="mb-4">
+                    <h4 class="font-weight-semi-bold mb-4">Address</h4>
+                    <form id="form-checkout" action="{% url 'checkoutSuccess' %}" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <label>Name</label>
+                                <input name="name" class="form-control" type="text">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label>E-mail</label>
+                                <input name="email" class="form-control" type="text" placeholder="example@email.com">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label>Mobile No</label>
+                                <input name="phone" class="form-control" type="text" placeholder="+123 456 789">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label>Note</label>
+                                <input name="note" class="form-control" type="text" placeholder="Giao vao buoi chieu">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <select name="city" class="custom-select form-select form-select-sm mb-3" id="city" aria-label=".form-select-sm">
+                                    <option value="" selected>Chọn tỉnh thành</option>           
+                                </select>
+                                              
+                                <select name="district" class="custom-select form-select form-select-sm mb-3" id="district" aria-label=".form-select-sm">
+                                    <option value="" selected>Chọn quận huyện</option>
+                                </select>
+                                    
+                                <select name="ward" class="custom-select form-select form-select-sm" id="ward" aria-label=".form-select-sm">
+                                    <option value="" selected>Chọn phường xã</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label>Street</label>
+                                <input name="street" class="form-control" type="text" placeholder="178 Quan Nhan">
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" name="payment" id="directcheck" value="direct">
+                                        <label class="custom-control-label" for="directcheck">Direct Check</label>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" name="payment" id="banktransfer" name="bank">
+                                        <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">Order Total</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="font-weight-medium mb-3">Products</h5>
+                        
+                        {% for item in buy_items %}
+                        <div class="d-flex justify-content-between">
+                            <p>{{item.product}}</p>
+                            <p id="price-item{{item.id}}" ></p>
+                        </div>   
+                        {% endfor %}
+                            
+                        <hr class="mt-0">
+                        <div class="d-flex justify-content-between mb-3 pt-1">
+                            <h6 class="font-weight-medium">Subtotal</h6>
+                            <h6 id="total-cart" class="font-weight-medium"></h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="font-weight-medium">Shipping</h6>
+                            <h6 class="font-weight-medium">$10</h6>
+                        </div>
+                    </div>
+                    <div class="card-footer border-secondary bg-transparent">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5 class="font-weight-bold">Total</h5>
+                            <h5 class="font-weight-bold">$160</h5>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    let prices = {{listPrice}}
+                    let listid = {{listID}}
+                    let listquantity = {{listQuantity}}
+                    let total = 0
+                    for(let i = 0; i < prices.length; i++){
+                        document.getElementById("price-item"+listid[i]).innerHTML = prices[i] * listquantity[i];
+                        total += prices[i] * listquantity[i]
+                    }
+                    document.getElementById("total-cart").innerHTML = total;
+                    submitForms = function(){
+                        document.getElementById("form-checkout").submit();
+                    }
+                </script>
+                <div class="card border-secondary mb-5">
+                    
+                    <div class="card-footer border-secondary bg-transparent">
+                        <button onclick="submitForms()" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Place Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Checkout End -->
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+        var citis = document.getElementById("city");
+        var districts = document.getElementById("district");
+        var wards = document.getElementById("ward");
+        var Parameter = {
+        url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json", 
+        method: "GET", 
+        responseType: "application/json", 
+        };
+        var promise = axios(Parameter);
+        promise.then(function (result) {
+        renderCity(result.data);
+        });
+
+        function renderCity(data) {
+        for (const x of data) {
+            citis.options[citis.options.length] = new Option(x.Name, x.Name);
+        }
+        citis.onchange = function () {
+            district.length = 1;
+            ward.length = 1;
+            if(this.value != ""){
+            const result = data.filter(n => n.Name === this.value);
+
+            for (const k of result[0].Districts) {
+                district.options[district.options.length] = new Option(k.Name, k.Name);
+            }
+            }
+        };
+        district.onchange = function () {
+            ward.length = 1;
+            const dataCity = data.filter((n) => n.Name === citis.value);
+            if (this.value != "") {
+            const dataWards = dataCity[0].Districts.filter(n => n.Name === this.value)[0].Wards;
+
+            for (const w of dataWards) {
+                wards.options[wards.options.length] = new Option(w.Name, w.Name);
+            }
+            }
+        };
+        }
+	</script>
+
+{% endblock content %}

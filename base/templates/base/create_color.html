@@ -1,0 +1,91 @@
+{% extends 'base/base_page.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<form class="needs-validation container" novalidate method="post">
+    {% csrf_token %}
+    <div class="form-row">
+      {# Size #}
+      <div class="col-md-6 mb-3">
+        <label>Color</label>
+        {{form.color}}
+        <div class="valid-feedback">
+          OK!
+        </div>
+        <div class="invalid-feedback">
+          Please choose Size!
+        </div>
+      </div>
+  
+    </div>
+
+    <button class="btn btn-primary" type="submit">Submit form</button>
+  </form>
+ 
+  <div class="container">
+    <hr>
+    <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+    <table id="myTable" class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Color</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          {% for color in colors %}
+          <tr>
+            <th scope="row">{{color.id}}</th>
+            <td>{{color}}</td>
+          </tr>
+          {% endfor %}
+            
+        </tbody>
+    </table>
+  </div>
+
+  <script>
+    function myFunction() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }       
+      }
+    }
+    </script>
+  
+  <script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+  </script>
+{% endblock content %}
