@@ -46,7 +46,7 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
                             <a href="" class="nav-item nav-link active">Home</a>
-                            <a href="{% url 'shop_category' 'tat-ca-san-pham' %}" class="nav-item nav-link">Shop</a>
+                            <a href="{% url 'shop_category' 'tat-ca-san-pham' 'xem-tat-ca' %}" class="nav-item nav-link">Shop</a>
                             <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
@@ -212,40 +212,7 @@
     <!-- Products End -->
 
 
-    <!-- Vendor Start -->
-    <div class="container-fluid py-5">
-        <div class="row px-xl-5">
-            <div class="col">
-                <div class="owl-carousel vendor-carousel">
-                    <div class="vendor-item border p-4">
-                        <img src="{% static 'base/img/vendor-1.jpg' %}" alt="">
-                    </div>
-                    <div class="vendor-item border p-4">
-                        <img src="{% static 'base/img/vendor-2.jpg' %}" alt="">
-                    </div>
-                    <div class="vendor-item border p-4">
-                        <img src="{% static 'base/img/vendor-3.jpg' %}" alt="">
-                    </div>
-                    <div class="vendor-item border p-4">
-                        <img src="{% static 'base/img/vendor-4.jpg' %}" alt="">
-                    </div>
-                    <div class="vendor-item border p-4">
-                        <img src="{% static 'base/img/vendor-5.jpg' %}" alt="">
-                    </div>
-                    <div class="vendor-item border p-4">
-                        <img src="{% static 'base/img/vendor-6.jpg' %}" alt="">
-                    </div>
-                    <div class="vendor-item border p-4">
-                        <img src="{% static 'base/img/vendor-7.jpg' %}" alt="">
-                    </div>
-                    <div class="vendor-item border p-4">
-                        <img src="{% static 'base/img/vendor-8.jpg' %}" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Vendor End -->
+
 
 
 {% endblock content %}

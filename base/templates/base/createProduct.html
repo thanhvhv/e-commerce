@@ -4,7 +4,8 @@
 {% block content %}
 
 
-<form class="needs-validation container" novalidate method="post">
+<form enctype="multipart/form-data" class="needs-validation container" novalidate method="post">
+  {% csrf_token %}
     <div class="form-row">
       <div class="col-md-4 mb-3">
         <label>Name Product</label>

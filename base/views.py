@@ -21,7 +21,9 @@ def createProduct(request):
     imageForm = ImageForm()
     if request.method == 'POST':
         productForm = ProductForm(request.POST, request.FILES)
+        print(productForm)
         if productForm.is_valid():
+            print("dasddddddddd")
             newProduct = productForm.save()
             imageForm = ImageForm(request.POST, request.FILES)
             images = request.FILES.getlist('image')
@@ -39,6 +41,7 @@ def create_color(request):
     colors = Color.objects.all()
     if request.method == 'POST':
         form = ColorForm(request.POST)
+        print(form)
         if form.is_valid():
             form.save()
         return redirect('create_color')
@@ -114,12 +117,10 @@ def checkout(request):
     listPrice = []
     listID = []
     listQuantity = []
-    if request.method == 'POST':
-        for x in items:
-            a = str(x.id)
-            if request.POST.get(a):
-                x.status = "Ordering"
-                x.save()
+    for x in items:
+        a = str(x.id)
+        x.status = "Ordering"
+        x.save()
     buy_items = CardItem.objects.filter(status='Ordering')
     for x in buy_items:
         listPrice.append(x.product.price)
@@ -145,20 +146,20 @@ def checkoutSuccess(request):
         order.street = request.POST["street"]
         order.payment = request.POST.get("payment")
         order.save()
-    order1 = Order.objects.get(id=2)
-    context = {'cates':cates, 'order':order1}
+    context = {'cates':cates, 'order':order}
     return render(request, 'base/checkout_success.html', context)
     
         
-def shop_category(request, pk_cate):
+def shop_category(request, pk_cate, pk_subcate):
     check_search = 0
     cates = Category.objects.all()
     products = Product()
     if pk_cate == 'tat-ca-san-pham':
         products = Product.objects.all()
-    else: 
-        cate = Category.objects.get(id=pk_cate)
-        
+    elif(pk_subcate == "xem-san-pham"): 
+        products = Product.objects.filter(category=pk_cate)
+    else:
+        products = Product.objects.filter(sub_category=pk_subcate)
     if request.method == 'GET':
         temp = request.GET.get('search')
         if temp is not None:
@@ -166,14 +167,18 @@ def shop_category(request, pk_cate):
             products = Product.objects.filter(
                 name__icontains=temp
             )
+        temp = request.GET.get('sort')
+        match temp:
+            case "price-max":
+                products = products.order_by("-price")
+            case "price-min":
+                products = products.order_by("price")
+            case "newest":
+                products = products.order_by("created")
+            case "oldest":
+                products = products.order_by("-created")
+    
     context = {'cates':cates, 'products':products, 'check_search':check_search}
-    return render(request, 'base/shop.html', context)
-
-
-def shop_subcategory(request, pk_cate, pk_subcate):
-    cates = Category.objects.all()
-    sub_cates = SubCategory.objects.filter(id=pk_subcate)
-    context = {'cates':cates, 'sub_cates':sub_cates}
     return render(request, 'base/shop.html', context)
 
 

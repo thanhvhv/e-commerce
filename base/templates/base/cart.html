@@ -80,17 +80,17 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3 pt-1">
                             <h6 class="font-weight-medium">Subtotal</h6>
-                            <h6 id="total-cart" class="font-weight-medium"></h6>
+                            <h6 id="total-cart" class="font-weight-medium">0</h6>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">$10</h6>
+                            <h6 class="font-weight-medium">30000</h6>
                         </div>
                     </div>
                     <div class="card-footer border-secondary bg-transparent">
                         <div class="d-flex justify-content-between mt-2">
                             <h5 class="font-weight-bold">Total</h5>
-                            <h5 class="font-weight-bold">$160</h5>
+                            <h5 id="total-pay" class="font-weight-bold">0</h5>
                         </div>
                         <button onclick="submitForms()" class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
                     </div>
@@ -108,6 +108,7 @@
             total += prices[i] * listquantity[i]
         }
         document.getElementById("total-cart").innerHTML = total;
+        document.getElementById("total-pay").innerHTML = total + 30000;
         submitForms = function(){
             document.getElementById("form-buy").submit();
         }

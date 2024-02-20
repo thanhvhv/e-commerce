@@ -95,34 +95,20 @@
                         <hr class="mt-0">
                         <div class="d-flex justify-content-between mb-3 pt-1">
                             <h6 class="font-weight-medium">Subtotal</h6>
-                            <h6 id="total-cart" class="font-weight-medium"></h6>
+                            <h6 id="total-cart" class="font-weight-medium">0</h6>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">$10</h6>
+                            <h6 id="total-cart" class="font-weight-medium">Shipping</h6>
+                            <h6 class="font-weight-medium">30000</h6>
                         </div>
                     </div>
                     <div class="card-footer border-secondary bg-transparent">
                         <div class="d-flex justify-content-between mt-2">
                             <h5 class="font-weight-bold">Total</h5>
-                            <h5 class="font-weight-bold">$160</h5>
+                            <h5 id="total-pay" class="font-weight-bold">0</h5>
                         </div>
                     </div>
                 </div>
-                <script>
-                    let prices = {{listPrice}}
-                    let listid = {{listID}}
-                    let listquantity = {{listQuantity}}
-                    let total = 0
-                    for(let i = 0; i < prices.length; i++){
-                        document.getElementById("price-item"+listid[i]).innerHTML = prices[i] * listquantity[i];
-                        total += prices[i] * listquantity[i]
-                    }
-                    document.getElementById("total-cart").innerHTML = total;
-                    submitForms = function(){
-                        document.getElementById("form-checkout").submit();
-                    }
-                </script>
                 <div class="card border-secondary mb-5">
                     
                     <div class="card-footer border-secondary bg-transparent">
@@ -133,7 +119,21 @@
         </div>
     </div>
     <!-- Checkout End -->
-
+    <script>
+        let prices = {{listPrice}}
+        let listid = {{listID}}
+        let listquantity = {{listQuantity}}
+        let total = 0
+        for(let i = 0; i < prices.length; i++){
+            document.getElementById("price-item"+listid[i]).innerHTML = prices[i] * listquantity[i];
+            total += prices[i] * listquantity[i]
+        }
+        document.getElementById("total-cart").innerHTML = total;
+        document.getElementById("total-pay").innerHTML = total + 30000;
+        submitForms = function(){
+            document.getElementById("form-checkout").submit();
+        }
+    </script>
     
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>

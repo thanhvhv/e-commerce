@@ -125,6 +125,7 @@ class Order(models.Model):
     district = models.CharField(max_length=30, default=None)
     ward = models.CharField(max_length=30, default=None)
     street = models.CharField(max_length=100, blank=True)
+    order_total = models.IntegerField(default=0)
     payment = models.CharField(max_length=30, choices=PAYMENT_CHOICE, default="Direct")
     status = models.CharField(max_length=15, choices=STATUS_ORDER_CHOICE, default="Pending")
     created = models.DateField(auto_now_add=True)
