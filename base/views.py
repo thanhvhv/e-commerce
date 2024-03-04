@@ -23,7 +23,6 @@ def createProduct(request):
         productForm = ProductForm(request.POST, request.FILES)
         print(productForm)
         if productForm.is_valid():
-            print("dasddddddddd")
             newProduct = productForm.save()
             imageForm = ImageForm(request.POST, request.FILES)
             images = request.FILES.getlist('image')
@@ -118,7 +117,6 @@ def checkout(request):
     listID = []
     listQuantity = []
     for x in items:
-        a = str(x.id)
         x.status = "Ordering"
         x.save()
     buy_items = CardItem.objects.filter(status='Ordering')
@@ -181,25 +179,6 @@ def shop_category(request, pk_cate, pk_subcate):
     context = {'cates':cates, 'products':products, 'check_search':check_search}
     return render(request, 'base/shop.html', context)
 
-
-def test(request):
-    cates = Category.objects.all()
-    subs = SubCategory.objects.all()
-    list_sub = []
-    list_cate = []
-    list_sub_parent = []
-    for x in cates:
-        list_cate.append(x.name)
-    for x in subs:
-        list_sub.append(x.name)
-        list_sub_parent.append(x.parent_category.name)
-    list_sub = json.dumps(list_sub)
-    list_cate = json.dumps(list_cate)
-    list_sub_parent = json.dumps(list_sub_parent)
-    print(list_sub_parent)
-    context = {'list_sub':list_sub, 'list_cate':list_cate, 'cates':cates, 'subs':subs, 'list_sub_parent':list_sub_parent}
-    return render(request, 'base/test.html', context)
-    
         
         
         
