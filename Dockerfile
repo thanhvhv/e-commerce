@@ -1,2 +1,2 @@
-FROM django:lastest
+FROM django
 USER root
