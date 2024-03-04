@@ -1,3 +1,3 @@
 FROM django:onbuild
 USER root
-COPY /home/e-mer .
+COPY . /home/e-mer
