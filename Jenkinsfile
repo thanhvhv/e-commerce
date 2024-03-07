@@ -18,7 +18,7 @@ pipeline {
         // }
         stage('Deploy') {
             steps {
-                ansiblePlaybook becomeUser: 'ubuntu', credentialsId: 'ssh', disableHostKeyChecking: true, inventory: './ansible/inventory', playbook: './ansible/install_docker.yml'
+                ansiblePlaybook becomeUser: 'ubuntu', credentialsId: 'ssh', disableHostKeyChecking: true, inventory: './ansible/inventory', playbook: './ansible/run_django.yml'
             }
         }
     }
