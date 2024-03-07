@@ -5,10 +5,10 @@
   tasks: 
 
   - name: ensure a container is running
-      docker_container:
-        name: django
-        state: started
-        image: "thanhvhv/jenkins"
-        pull: true
-        ports:
-          - "80:8000"
+    docker_container:
+      name: django
+      state: started
+      image: "thanhvhv/jenkins"
+      pull: true
+      ports:
+        - "80:8000"
