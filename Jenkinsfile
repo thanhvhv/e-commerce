@@ -10,7 +10,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                ansiblePlaybook become: true, becomeUser: 'ubuntu', credentialsId: 'ssh', inventory: './ansible/inventory', playbook: './ansible/install_docker.yml', sudo: true, sudoUser: 'ubuntu'
+                ansiblePlaybook become: true, becomeUser: 'ubuntu', credentialsId: 'ssh', inventory: './ansible/inventory', playbook: './ansible/install_docker.yml'
             }
         }
     }
