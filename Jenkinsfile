@@ -12,13 +12,14 @@ pipeline {
             steps {
                 sshagent(['remote_server_43']) {
                     // Execute a single SSH command with multiple shell commands combined
-                    sh '''
+                    sh """
                         ssh -o StrictHostKeyChecking=no thanhvhv@192.168.3.43 /bin/bash << EOF
-                        cd jenkinsss
-                        echo 'Hello' > choe
-                        cat choe
+                        mkdir jenkins
+                        cd jenkins
+                        echo 'Hello' > text
+                        cat text
                         EOF
-                    '''
+                    """
                 }
             }
         }
