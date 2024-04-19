@@ -10,8 +10,8 @@ pipeline {
 
         stage('SSH') {
             steps {
-                sshagent(['ssh-remote']) {
-                    sh 'ssh -o StrictHostKeyChecking=no thanhvhv@192.168.3.42 mkdir jenkinsss'
+                sshagent(['remote_server_43']) {
+                    sh 'ssh -o StrictHostKeyChecking=no thanhvhv@192.168.3.43 mkdir jenkinsss'
                 }
             }
         }
