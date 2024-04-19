@@ -18,7 +18,7 @@ pipeline {
                         cd jenkins
                         echo 'Hello' > text
                         cat text
-                        EOF
+                    EOF
                     """
                 }
             }
