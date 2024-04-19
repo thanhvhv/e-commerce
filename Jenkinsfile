@@ -11,15 +11,17 @@ pipeline {
         stage('SSH') {
             steps {
                 sshagent(['remote_server_43']) {
-                // Combine all commands into a single string
-                def commands = """
-                cd jenkinsss
-                echo 'Hello' > choe
-                cat choe
-                """
+                    // Combine all commands into a single string
+                    def commands = """
+                    mkdir jenkis
+                    cd jenkins
+                    echo 'Hello World' > text
+                    cat text
+                    """
 
-                // Execute the combined commands on the remote host
-                sh "ssh -o StrictHostKeyChecking=no thanhvhv@192.168.3.43 '${commands}'"
+                    // Execute the combined commands on the remote host
+                    sh "ssh -o StrictHostKeyChecking=no thanhvhv@192.168.3.43 '${commands}'"
+                }
             }
         }
     }
