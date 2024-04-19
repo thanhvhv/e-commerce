@@ -7,18 +7,12 @@ pipeline {
                 git 'https://github.com/thanhvhv/e-commerce.git'
             }
         }
-        stage('Build') {
+
+        stage('SSH') {
             steps {
-                // This step should not normally be used in your script. Consult the inline help for details.
-                withDockerRegistry(credentialsId: 'docker-hubb', url: 'https://index.docker.io/v1/')  {
-                    sh 'docker build -t thanhvhv/jenkins .'
-                    sh 'docker push thanhvhv/jenkins'
+                sshagent(['ssh-remote']) {
+                    sh 'mkdir jenkins'
                 }
-            }
-        }
-        stage('Deploy') {
-            steps {
-                ansiblePlaybook becomeUser: 'ubuntu', credentialsId: 'ssh', disableHostKeyChecking: true, inventory: './ansible/inventory', playbook: './ansible/run_django.yml'
             }
         }
     }
