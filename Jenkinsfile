@@ -10,11 +10,7 @@ pipeline {
 
         stage('Slack 1'){
             steps{
-                slackSend channel: '#general', message: '''
-                The server will be unavailable during the restart process. 
-                We expect this to take only a few minutes, but the actual time may differ slightly.
-                Change ID: ${CHANGE_ID}
-                '''
+                slackSend channel: '#general', message: 'The server will be unavailable during the restart process. \nWe expect this to take only a few minutes, but the actual time may differ slightly. \nChange ID: ${env.CHANGE_ID}'
             }
         }
 
