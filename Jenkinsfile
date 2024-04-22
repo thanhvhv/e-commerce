@@ -14,20 +14,20 @@ pipeline {
             }
         }
 
-        stage('SSH') {
-            steps {
-                sshagent(['remote_server_43']) {
-                    // Execute a single SSH command with multiple shell commands combined
-                    sh """
-                        ssh -o StrictHostKeyChecking=no thanhvhv@192.168.3.43 /bin/bash << EOF
-                        mkdir jenkins
-                        cd jenkins
-                        echo 'Hello World' > text
-                        cat text
-                    """
-                }
-            }
-        }
+        // stage('SSH') {
+        //     steps {
+        //         sshagent(['remote_server_43']) {
+        //             // Execute a single SSH command with multiple shell commands combined
+        //             sh """
+        //                 ssh -o StrictHostKeyChecking=no thanhvhv@192.168.3.43 /bin/bash << EOF
+        //                 mkdir jenkins
+        //                 cd jenkins
+        //                 echo 'Hello World' > text
+        //                 cat text
+        //             """
+        //         }
+        //     }
+        // }
 
         stage('Slack 2'){
             steps{
