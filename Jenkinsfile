@@ -10,7 +10,7 @@ pipeline {
 
         stage('Slack 1'){
             steps{
-                slackSend channel: '#general', message: "The server will be unavailable during the restart process. \nWe expect this to take only a few minutes, but the actual time may differ slightly. \nBUILD ID: ${BUILD_ID} - ${BUILD_DISPLAY_NAME}. \nBuild Number: ${BUILD_NUMBER}.\n Git Commit : ${GIT_COMMIT} - ${GIT_PREVIOUS_COMMIT} - ${GIT_COMMITTER_NAME}."
+                slackSend channel: '#general', message: "The server will be unavailable during the restart process. \nWe expect this to take only a few minutes, but the actual time may differ slightly. \nBUILD ID: ${BUILD_ID} \nBuild Number: ${BUILD_NUMBER}.\n Git Commit : ${GIT_COMMIT}"
             }
         }
 
